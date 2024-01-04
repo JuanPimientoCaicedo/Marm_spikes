@@ -27,6 +27,9 @@ function Pr = Presence_ratio(spikes, clusters, recording_duration, spacing)
 %        ascending fashion.
 %        with the previous example, Pr would be computed in this order:
 %        [1, 2, 12, 14]. each of these values is a cluster ID.
+%------------------------------------------
+% Copyright (C) 2024 by Juan Pimiento
+%------------------------------------------
 
 
 good_clusters = unique(clusters);
