@@ -39,8 +39,6 @@ function [fpRate, numViolations] = ISIViolations(spikeTrain, minISI, refDur)
 % This function was taken from Nick Steinmetz github repo of
 % QualityMetrics. For more information, go to: https://www.nicksteinmetz.com/
 
-warning('sortingQuality:ISIViolations -- The behavior of this function has changed!! as of 2023-09-05. The fix should make only minor changes to the results. Please see function comments for details.')
-
 Nt = length(spikeTrain); % total spike count
 D = max(spikeTrain); % duration of recording
 isis = diff(spikeTrain);
