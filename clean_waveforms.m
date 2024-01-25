@@ -54,6 +54,7 @@ function wf = clean_waveforms(Directory, spikes_file, clusters_file, window, num
 % Copyright (C) 2024 by Juan Pimiento
 %------------------------------------------
 
+tic %start stopwatch (time consumption)
 
 % Get waveforms
 good_clusters = unique(clusters_file);
@@ -96,3 +97,5 @@ xlim([gwfparams.wfWin(1) gwfparams.wfWin(2)]);
 title(['Waveform average of Cluster ',num2str(good_clusters(clu_of_int))]);
 xlabel('time (samples)'); ylabel('voltage (\muV)');
 hold off
+
+toc % stop stopwatch (time consumption)
