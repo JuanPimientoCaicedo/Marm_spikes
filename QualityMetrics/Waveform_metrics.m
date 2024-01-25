@@ -143,7 +143,7 @@ for z = 1:length(good_clusters)
             amplitudes(binned_spikes(q-1):binned_spikes(q)) = max(blocks,[],2);
     end
     cluster_amps{z,1} = amplitudes;
-    cluster_amps{z,2} = wf.spikeTimeKeeps;
+    cluster_amps{z,2} = wf.spikeTimeKeeps./sampling_frequency;
     amp_median(z) = median(amplitudes);
     Amp_Coeff_of_Disp(z) = (prctile(amplitudes,75) - prctile(amplitudes,25))/(prctile(amplitudes,75) + prctile(amplitudes,25)); % Quartile coefficient of dispersion
     amp_mean(z) = mean(amplitudes);
