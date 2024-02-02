@@ -144,10 +144,10 @@ for z = 1:length(good_clusters)
     end
     cluster_amps{z,1} = amplitudes;
     cluster_amps{z,2} = wf.spikeTimeKeeps./sampling_frequency;
-    amp_median(z) = median(amplitudes);
+    amp_median(z) = median(amplitudes,'omitnan');
     Amp_Coeff_of_Disp(z) = (prctile(amplitudes,75) - prctile(amplitudes,25))/(prctile(amplitudes,75) + prctile(amplitudes,25)); % Quartile coefficient of dispersion
-    amp_mean(z) = mean(amplitudes);
-    amp_std(z) = std(amplitudes);
+    amp_mean(z) = mean(amplitudes,'omitnan');
+    amp_std(z) = std(amplitudes,'omitnan');
     amp_CV(z) = amp_std(z)/amp_mean(z);
 
     disp(['Completed ' int2str(z) ' units of ' int2str(length(good_clusters)) '.']);
