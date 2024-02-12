@@ -82,14 +82,14 @@ end
 
 % Plot example
 clu_of_int = randi(length(good_clusters)); % cluster of interest 
-figure; 
+figure('visible','off'); 
 imagesc(squeeze(wf.waveFormsMean(clu_of_int,:,:)))
 set(gca, 'YDir', 'normal'); xlabel('time (samples)'); ylabel('channel number'); 
 colormap(colormap_BlueWhiteRed); caxis([-1 1]*max(abs(caxis()))/2); box off;
 title(['Voltage deflections of Cluster ',num2str(good_clusters(clu_of_int))])
 [y, idx] = max(max(abs(squeeze(wf.waveFormsMean(clu_of_int,:,:))),[],2));
 x_axis = gwfparams.wfWin(1):gwfparams.wfWin(2);
-figure
+figure('visible','off');
 plot(x_axis, squeeze(wf.waveForms(clu_of_int,:,idx,:)),"Color",[0.5 0.5 0.5])
 hold on
 plot(x_axis, squeeze(wf.waveFormsMean(clu_of_int,idx,:)),"LineWidth",1);

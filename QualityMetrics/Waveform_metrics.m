@@ -1,7 +1,7 @@
 
 
 
-function [amp_median, Amp_Coeff_of_Disp, amp_mean, amp_std, amp_CV, cluster_amps] = Waveform_metrics(Directory, spikes, clusters,recording_duration,sampling_frequency,size)
+function [amp_median, Amp_Coeff_of_Disp, amp_mean, amp_std, amp_CV, cluster_amps,peak_channel] = Waveform_metrics(Directory, spikes, clusters,recording_duration,sampling_frequency,size)
 
 % -----------------------------
 % function [amp_median, Amp_Coeff_of_Disp, amp_mean, amp_std, amp_CV, cluster_amps] = Waveform_metrics(Directory, spikes, clusters,recording_duration,sampling_frequency)
@@ -57,6 +57,8 @@ function [amp_median, Amp_Coeff_of_Disp, amp_mean, amp_std, amp_CV, cluster_amps
 %   amp_CV - coefficient of variation of the spike amplitude distribution.
 % 
 %   cluster_amps - Cell array with the spike amplitudes of every cluster.
+%   
+%   peak_channel - Channel with the highest voltage deflection.
 % 
 %------------------------------------------
 % Copyright (C) 2024 by Juan Pimiento
@@ -86,6 +88,7 @@ Amp_Coeff_of_Disp = nan(length(good_clusters),1); % Quartile coefficient of disp
 amp_mean = nan(length(good_clusters),1);
 amp_std = nan(length(good_clusters),1);
 amp_CV = nan(length(good_clusters),1);
+peak_channel = nan(length(good_clusters),1);
 cluster_amps = cell(length(good_clusters),2);
 
 tic %start stopwatch (time consumption)
@@ -142,6 +145,7 @@ for z = 1:length(good_clusters)
             blocks = abs(squeeze(wf.waveForms(binned_spikes(q-1):binned_spikes(q),max_channel(q-1),central_window)));
             amplitudes(binned_spikes(q-1):binned_spikes(q)) = max(blocks,[],2);
     end
+    peak_channel(z) = mode(max_channel);
     cluster_amps{z,1} = amplitudes;
     cluster_amps{z,2} = wf.spikeTimeKeeps./sampling_frequency;
     amp_median(z) = median(amplitudes,'omitnan');
