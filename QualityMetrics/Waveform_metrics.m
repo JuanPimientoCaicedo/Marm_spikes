@@ -145,7 +145,7 @@ for z = 1:length(good_clusters)
             blocks = abs(squeeze(wf.waveForms(binned_spikes(q-1):binned_spikes(q),max_channel(q-1),central_window)));
             amplitudes(binned_spikes(q-1):binned_spikes(q)) = max(blocks,[],2);
     end
-    peak_channel(z) = mode(max_channel);
+    [~,peak_channel(z)] = max(max(abs(wf.waveFormsMean),[],2));
     cluster_amps{z,1} = amplitudes;
     cluster_amps{z,2} = wf.spikeTimeKeeps./sampling_frequency;
     amp_median(z) = median(amplitudes,'omitnan');
